@@ -58,7 +58,7 @@ impl Log {
     pub fn to_sql(&self) -> String {
         format!("INSERT INTO `log` 
                 (date, name, level, message)
-                VALUES ({}, \"{}\", \"{}\", \"{}\")",
+                VALUES ({}, \"{}\", \"{}\", \"{}\");",
                 self.date, self.name, self.level, self.message)
     }
 
@@ -102,4 +102,18 @@ pub fn read_content(filename: &str, content: &mut String) {
     log_file.read_to_string(content).unwrap();
 }
 
+/// Reads all lines in a file and set a Vector of Log.
+///
+/// # Arguments
+///
+/// * filename  - The name of the file to read
+/// * lines     - The Vector that will contain the Logs.
+pub fn read_lines(filename: &str, lines: &mut Vec<Log>) {
+    let mut content = String::new();
+    read_content(filename, &mut content);
+
+    for line in content.lines() {
+        lines.push(Log::from_line(line))
+    }
+}
 
