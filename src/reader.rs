@@ -23,6 +23,8 @@ pub fn read_lines(filename: &str, lines: &mut Vec<log::Log>) {
     read_content(filename, &mut content);
 
     for line in content.lines() {
-        lines.push(log::Log::from_line(line))
+        if let Some(l) = log::Log::from_line(line) {
+            lines.push(l);
+        }
     }
 }
