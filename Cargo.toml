@@ -1,0 +1,6 @@
+[package]
+name = "migrate-log"
+version = "0.1.0"
+authors = ["anthony"]
+
+[dependencies]
