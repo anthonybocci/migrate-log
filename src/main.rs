@@ -3,22 +3,23 @@ extern crate regex;
 
 mod log;
 mod cli;
-
+mod reader;
 
 fn main() {
-
-    let input_filename = match cli::get_input_file() {
+    //Gets the input filename from the command line.
+    let input_filename: String = match cli::get_input_file() {
         Some(f) => f,
         None    => {
             panic!("There is no input file. Consider using --input=")
         }
     };
     println!("Reading log file {}...", input_filename);
-
+    
+    //Reads all the lines from the input filename
     let mut lines : Vec<log::Log> = Vec::new();
-    log::read_lines("/home/anthony/Bureau/test.log", &mut lines);
+    reader::read_lines(&input_filename[..], &mut lines);
 
-    //let log = log::Log::from_line("[2017-12-31 10:24:42] Clima logger.WARNING: Foo [] []");
+    //Prints the SQL statements
     for line in &lines {
         println!("{}", line.to_sql());
     }
