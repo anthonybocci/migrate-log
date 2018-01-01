@@ -25,7 +25,8 @@ This project is at its beginning and there are lot of thing that can be done.
 be a trait and Monolog should implement it (just an idea)
 - Support other DBMS, for now only MySQL is supported. There should be a trait
 and each DBMS should implement it (just an idea)
-- Support different exports like `file -> SQL`, `SQL -> file`, perhaps others
+- Support different exports like `file -> SQL`, `SQL -> file`, `Monolog file ->
+CSV file`, perhaps others
 
 
 ## Usage
