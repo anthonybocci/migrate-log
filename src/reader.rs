@@ -1,4 +1,19 @@
-use log;
+/// This file is part of Migrate Log.
+///
+/// Migrate Log is free software: you can redistribute it and/or modify
+/// it under the terms of the GNU General Public License as published by
+/// the Free Software Foundation, either version 3 of the License, or
+/// any later version.
+///
+/// Migrate Log is distributed in the hope that it will be useful,
+/// but WITHOUT ANY WARRANTY; without even the implied warranty of
+/// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+/// GNU General Public License for more details.
+///
+/// You should have received a copy of the GNU General Public License
+/// along with Migrate Log.  If not, see <http://www.gnu.org/licenses/>.
+
+
 
 use std::fs::File;
 use std::io::prelude::*;
@@ -12,19 +27,4 @@ pub fn read_content(filename: &str, content: &mut String) {
     log_file.read_to_string(content).unwrap();
 }
 
-/// Reads all lines in a file and set a Vector of Log.
-///
-/// # Arguments
-///
-/// * filename  - The name of the file to read
-/// * lines     - The Vector that will contain the Logs.
-pub fn read_lines(filename: &str, lines: &mut Vec<log::Log>) {
-    let mut content = String::new();
-    read_content(filename, &mut content);
 
-    for line in content.lines() {
-        if let Some(l) = log::Log::from_line(line) {
-            lines.push(l);
-        }
-    }
-}
