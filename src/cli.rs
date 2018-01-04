@@ -44,9 +44,13 @@ pub fn get_params(args: &Vec<String>, arg_prefix: &str) -> HashMap<String, Strin
     //Checks every cli argument in order to get the argument name and the
     //associated value in a HashMap.
     for (_index, value) in args.iter().enumerate() {
-        if value.starts_with(arg_prefix) && value.contains('=') {
+        if value.starts_with(arg_prefix) {
+            //Uses the whole value if there is no '=', like "--bin"
+            let mut arg_parts: Vec<&str> = vec![value, ""];
             let end_prefix_index: usize = arg_prefix.len();
-            let arg_parts: Vec<&str> = value.split('=').collect();
+            if value.contains('=') { //If there is a '=', split as key => value
+                arg_parts = value.split('=').collect();
+            } 
             params.insert(arg_parts[0][end_prefix_index..].to_owned(), arg_parts[1].to_owned());
         }
     }
