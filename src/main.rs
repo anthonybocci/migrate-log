@@ -27,10 +27,15 @@ fn main() {
 
     let args = cli::get_args();
 
-    let filtered = cli::get_params(&args, "--input-");
+    let input_filtered = cli::get_params(&args, "--input-");
     
-    let monolog = input::monolog::Monolog::new();
-    let logs = monolog.import(filtered);
+    
+    if !input_filtered.contains_key("module") {
+        panic!("An input module is required! Use --input-module=... to set one.");
+    }
+    let input_module_name = input_filtered.get("module").unwrap().to_owned();
+    let input_module: Box<Importable> = input::get_input_module(&input_module_name[..]);
+    let logs = input_module.import(input_filtered);
 
     
     //Prints the SQL statements
@@ -38,3 +43,4 @@ fn main() {
         println!("{}", line.to_sql());
     }
 }
+

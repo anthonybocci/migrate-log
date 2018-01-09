@@ -39,3 +39,21 @@ pub trait Importable {
     /// Returns a vector of log::Log, the universal Log for this program.
     fn import(&self, args: HashMap<String, String>) -> Vec<log::Log>;
 }
+
+/// Instantiates the input module according to the module name.
+///
+/// # Pameters
+///
+/// `module_name` - The module name.
+///
+/// # Panics
+///
+/// If module_name is an invalid module.
+pub fn get_input_module(module_name: &str) -> Box<Importable> {
+    match module_name {
+        "monolog"   =>  Box::new(monolog::Monolog::new()),
+        _           =>  {
+            panic!("The input module is not implemented.");
+        }
+    }
+}
