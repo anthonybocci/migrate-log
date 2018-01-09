@@ -21,8 +21,6 @@ This project is at its beginning and there are lot of thing that can be done.
 ### Todo
 
 - Check if the log file exists
-- Allows different format of logs. For now only Monolog is allowed. There should
-be a trait and Monolog should implement it (just an idea)
 - Support other DBMS, for now only MySQL is supported. There should be a trait
 and each DBMS should implement it (just an idea)
 - Support different exports like `file -> SQL`, `SQL -> file`, `Monolog file ->
