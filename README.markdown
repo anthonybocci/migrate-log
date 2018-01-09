@@ -32,11 +32,10 @@ CSV file`, perhaps others
 For now there is only one possible usage.
 
 ```shell
-./migration-log --input=the-log-file.log
+./migration-log --input-module=monolog --input=the-log-file.log
 ```
 
 ### Options
 
-There is the only available option:
-
-- `--input`: The path to the log file to convert to SQL.
+The options depend on the modules you use. Please refer to the documentation of
+the input and output modules to know all the possible options.
