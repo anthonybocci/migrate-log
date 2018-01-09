@@ -32,7 +32,7 @@ CSV file`, perhaps others
 For now there is only one possible usage.
 
 ```shell
-./migration-log --input-module=monolog --input=the-log-file.log
+./migration-log --input-module=monolog --input-file=the-log-file.log
 ```
 
 ### Options
