@@ -7,27 +7,21 @@ This project has two main goals:
 - The second one is to provide a program that perform a migration of logs from
 file to database or other.
 
-## Work in-progress
+### Features
 
-This project is at its beginning and there are lot of thing that can be done.
-
-### Done
-
-- Reads a log file
-- Loops over log lines ignoring the mis-formatted ones
-- Instanciates `Log`s for each line
-- Displays on STDOUT the SQL statements corresponding to each Log
+- Uses an extensible module system to import the logs
+- Imports the logs to get a vector of logs
+- Uses an extensible module system to export the logs
+- Exports the logs an any format according to the choosen output module
 
 ## Usage
 
-For now there is only one possible usage.
-
-```shell
-./migration-log --input-module=monolog --input-file=the-log-file.log \
---output-module=mysql [--output-file=the-output-file.sql]
-```
+See the [Usage documentation
+file](https://github.com/anthonybocci/migrate-log/tree/master/doc/usage.markdown)
+to see how to use this program.
 
 ### Options
 
 The options depend on the modules you use. Please refer to the documentation of
-the input and output modules to know all the possible options.
+the input and output modules to know all the possible options. All
+documentations are in the `doc/` directory.
