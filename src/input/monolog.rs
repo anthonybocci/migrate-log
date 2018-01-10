@@ -22,13 +22,27 @@ pub struct Monolog {}
 
 
 impl Monolog {
+    /// Returns a new instance of the Monolog importer.
     pub fn new() -> Monolog {
         Monolog {}
     }
 }
 
 impl Importable for Monolog {
-    
+    /// Imports the logs from the monolog format.
+    ///
+    /// # Parameters
+    ///
+    /// `&self` - The Monolog instance.
+    /// `args` - The HashMap containing the cli args.
+    ///
+    /// # Returns
+    ///
+    /// A vector containing the logs.
+    ///
+    /// # Panics
+    ///
+    /// If the filename passed in args doesn't exist.
     fn import(&self, args: HashMap<String, String>) -> Vec<log::Log> {
         let filename = match args.get("file") {
             Some(f) => f,

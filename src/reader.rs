@@ -20,9 +20,23 @@ use std::io::prelude::*;
 
 /// Reads the content of a file and sets it `content`.
 /// Panics if the file can't be open.
+///
+/// # Parameters
+///
+/// `filename` - The filename to read.
+/// `content` - The content where write the file content.
+///
+/// # Panics
+///
+/// If filename can't be open.
 pub fn read_content(filename: &str, content: &mut String) {
     let log_file_name = filename;
-    let mut log_file = File::open(log_file_name).unwrap();
+    let mut log_file = match File::open(log_file_name) {
+        Ok(f)   =>  f,
+        Err(e)  =>  {
+            panic!("The file {} can't be open.", log_file_name);
+        }
+    };
     //Reads the log file
     log_file.read_to_string(content).unwrap();
 }
