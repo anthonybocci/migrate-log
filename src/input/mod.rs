@@ -19,7 +19,7 @@ use log;
 /// A module that contains the necessary to manage a Monolog log file as input.
 pub mod monolog;
 
-/// A trat that every "importer" has to derive to. If a module or a struct
+/// A trait that every "importer" has to derive to. If a module or a struct
 /// wants to be able to be called to import logs, it will derive this trait.
 pub trait Importable {
     /// Imports many logs from any source specified in the arguments or other
@@ -28,7 +28,7 @@ pub trait Importable {
     /// # Parameters
     ///
     /// `&self` - The struct.
-    /// `args` - A &HashMap that contains the cli parameters after being filtered.
+    /// `args` - A HashMap that contains the cli parameters after being filtered.
     /// In the case of Importable, they are filtered on "--input-". Because
     /// they all have the same prefix ("--input-"), this prefix was removed
     /// before being passed into the HashMap.
@@ -42,7 +42,7 @@ pub trait Importable {
 
 /// Instantiates the input module according to the module name.
 ///
-/// # Pameters
+/// # Parameters
 ///
 /// `module_name` - The module name.
 ///
