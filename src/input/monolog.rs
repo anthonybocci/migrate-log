@@ -17,6 +17,7 @@ use ::log;
 use ::reader;
 use super::Importable;
 use std::collections::HashMap;
+use regex::Regex;
 
 pub struct Monolog {}
 
@@ -56,11 +57,28 @@ impl Importable for Monolog {
         //Reads the file content to get the lines
         reader::read_content(filename, &mut file_content);
         for line in file_content.lines() {
-            if let Some(l) = log::Log::from_line(line) {
-                logs.push(l);
+            let mut log = log::Log::new();
+            //Uses lazy_static in order to compile the regex only once.
+            lazy_static! {
+                /// The regex used to find and capture a Log line.
+                static ref LOG_REGEX: Regex = Regex::new(r"^\[(\d{4}-\d{2}-\d{2} \d{1,2}:\d{1,2}:\d{1,2})\] (.+)\.([A-Z]+): (.+) \[(.*)\] \[(.*)\]").unwrap();
             }
-        }
+            //Checks if the regex matches and if we found all the datas.
+            let captured_dates = match LOG_REGEX.captures(line) {
+                Some(m) => m,
+                None    => {
+                    continue;
+                }
+            };
 
+            log.date = captured_dates[1].to_owned();
+            log.name = captured_dates[2].to_owned();
+            log.level = captured_dates[3].to_owned();
+            log.message = captured_dates[4].to_owned();
+            log.context_raw = captured_dates[5].to_owned();
+            log.extra_raw = captured_dates[6].to_owned();
+            logs.push(log);
+        }
         logs
     }
 }
