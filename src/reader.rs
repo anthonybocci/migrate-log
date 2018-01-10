@@ -33,7 +33,7 @@ pub fn read_content(filename: &str, content: &mut String) {
     let log_file_name = filename;
     let mut log_file = match File::open(log_file_name) {
         Ok(f)   =>  f,
-        Err(e)  =>  {
+        Err(_)  =>  {
             panic!("The file {} can't be open.", log_file_name);
         }
     };
