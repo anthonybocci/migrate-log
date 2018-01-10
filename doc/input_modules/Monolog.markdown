@@ -4,7 +4,7 @@
 the documentation you need to create Monolog logs are at the link, so I will not
 describe here the strucure of a Monolog log.
 
-One of the input modules this program can manage is Monolog, and as module it
+One of the input modules this program can manage is Monolog, and as a module it
 needs some arguments.
 
 ## Informations
@@ -16,8 +16,12 @@ read rights on this file.
 
 ## Usage
 
-Here is an example of how to use the Monolog module
+Here is an example of how to use the Monolog module.
 
 ```bash
-./migrate-log --input-module=monolog --input-file=/home/user/application.log
+./migrate-log --input-module=monolog --input-file=/home/user/application.log \
+--output-module=mysql
 ```
+
+> Note that the output module choosen here is only an example, you can use the
+> module that you want.

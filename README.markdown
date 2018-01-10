@@ -18,21 +18,13 @@ This project is at its beginning and there are lot of thing that can be done.
 - Instanciates `Log`s for each line
 - Displays on STDOUT the SQL statements corresponding to each Log
 
-### Todo
-
-- Check if the log file exists
-- Support other DBMS, for now only MySQL is supported. There should be a trait
-and each DBMS should implement it (just an idea)
-- Support different exports like `file -> SQL`, `SQL -> file`, `Monolog file ->
-CSV file`, perhaps others
-
-
 ## Usage
 
 For now there is only one possible usage.
 
 ```shell
-./migration-log --input-module=monolog --input-file=the-log-file.log
+./migration-log --input-module=monolog --input-file=the-log-file.log \
+--output-module=mysql [--output-file=the-output-file.sql]
 ```
 
 ### Options
