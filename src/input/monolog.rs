@@ -61,7 +61,7 @@ impl Importable for Monolog {
             //Uses lazy_static in order to compile the regex only once.
             lazy_static! {
                 /// The regex used to find and capture a Log line.
-                static ref LOG_REGEX: Regex = Regex::new(r"^\[(\d{4}-\d{2}-\d{2} \d{1,2}:\d{1,2}:\d{1,2})\] (.+)\.([A-Z]+): (.+) \[(.*)\] \[(.*)\]").unwrap();
+                static ref LOG_REGEX: Regex = Regex::new(r"^\[(?P<datetime>\d{4}-\d{2}-\d{2} \d{1,2}:\d{1,2}:\d{1,2})\] (?P<name>.+)\.(?P<level>[A-Z]+): (?P<message>.+) (?P<context>\[\]|\{.+\}) (?P<extra>\[\]|\{.+\})").unwrap();
             }
             //Checks if the regex matches and if we found all the datas.
             let captured_dates = match LOG_REGEX.captures(line) {
@@ -71,12 +71,18 @@ impl Importable for Monolog {
                 }
             };
 
-            log.date = captured_dates[1].to_owned();
-            log.name = captured_dates[2].to_owned();
-            log.level = captured_dates[3].to_owned();
-            log.message = captured_dates[4].to_owned();
-            log.context_raw = captured_dates[5].to_owned();
-            log.extra_raw = captured_dates[6].to_owned();
+            log.date = captured_dates["datetime"].to_owned();
+            log.name = captured_dates["name"].to_owned();
+            log.level = captured_dates["level"].to_owned();
+            log.message = captured_dates["message"].to_owned();
+            log.context_raw = match &captured_dates["context"] {
+                "[]"    => "".to_owned(),
+                any     => any.to_owned(), //If any other string, returns it.
+            };
+            log.extra_raw = match &captured_dates["extra"] {
+                "[]"    =>  "".to_owned(),
+                any     =>  any.to_owned(), //If any other string, returns it.
+            };
             logs.push(log);
         }
         logs
