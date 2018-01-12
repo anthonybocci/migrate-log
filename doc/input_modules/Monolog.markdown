@@ -25,3 +25,8 @@ Here is an example of how to use the Monolog module.
 
 > Note that the output module choosen here is only an example, you can use the
 > module that you want.
+
+## TODO
+
+- Parse JSON in `extra_raw` and `context_raw` in order to fill `extra` and
+`context`

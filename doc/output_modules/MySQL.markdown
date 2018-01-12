@@ -28,3 +28,8 @@ Here is an example of how to use the MySQL module.
 > here Monolog is used only as example, you can use the one you prefer.
 
 > The argument that is between `[` and `]` is optional.
+
+## TODO
+
+- Use a better schema
+- Use the `context` and `extra` fields
