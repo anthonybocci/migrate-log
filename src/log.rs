@@ -15,6 +15,7 @@
 
 
 use std::collections::HashMap;
+use std::fmt;
 
 /// Represents a log item. It can be either a line in a file text,
 ///in a table, the schema is the same.
@@ -67,4 +68,19 @@ impl Log {
     }
 }
 
+/// An enumeration used to list the type of complementary informations.
+pub enum LogInformationType {
+    Context = 1,
+    Extra = 2,
+}
 
+
+impl fmt::Display for LogInformationType {
+    /// Displays the LogInformationType enumeration.
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match *self {
+            LogInformationType::Context => write!(f, "1"),
+            LogInformationType::Extra   => write!(f, "2"),
+        }
+    }
+}

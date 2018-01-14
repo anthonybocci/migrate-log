@@ -51,6 +51,20 @@ impl Exportable for MySQL {
                 &format!("INSERT INTO `log` (date, name, level, message) VALUES (\"{}\", \"{}\", \"{}\", \"{}\");\n",
                 &log.date[..], &log.name[..], &log.level[..], &log.message[..])    
             );
+            //Writes the context
+            for (key, value) in log.context.iter() {
+                content.push_str(
+                    &format!("INSERT INTO `log_informations` (key, value, type) VALUES (\"{}\", \"{}\", {})",
+                    &key[..], &value[..], log::LogInformationType::Context)
+                );
+            }
+
+            for (key, value) in log.extra.iter() {
+                content.push_str(
+                    &format!("INSERT INTO `log_informations` (key, value, type) VALUES (\"{}\", \"{}\", {})",
+                    &key[..], &value[..], log::LogInformationType::Extra)
+                );
+            }
         }
         // Choose to write into a file or print.
         if let Some(filename) = args.get("file") {
